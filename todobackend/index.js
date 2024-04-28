@@ -6,6 +6,12 @@ const port = 8080;
 
 app.use(express.json())
 app.use(cors())
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+})
 app.post('/signup',(req,res)=>{
     let user=req.body;
     users.findOne({username:user.username})
