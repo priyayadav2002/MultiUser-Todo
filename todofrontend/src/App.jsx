@@ -76,12 +76,14 @@ function Signup() {
                 email: email,
                 password: password,
               };
-              axios.post("http://localhost:8080/signup", data).then((res) => {
-                console.log(res);
-                if (res.status == 200) {
-                  navigate("/home", { state: username });
-                }
-              });
+              axios
+                .post("https://multi-user-todo-backend.vercel.app/signup", data)
+                .then((res) => {
+                  console.log(res);
+                  if (res.status == 200) {
+                    navigate("/home", { state: username });
+                  }
+                });
             }}
           >
             {" "}
@@ -130,12 +132,14 @@ function Login() {
             className="p-2 m-2 border-2 border-black rounded-md"
             onClick={() => {
               let data = { password, username: username };
-              axios.post("http://localhost:8080/login", data).then((res) => {
-                console.log(res);
-                if (res.status == 200) {
-                  navigate("/home", { state: username });
-                }
-              });
+              axios
+                .post("https://multi-user-todo-backend.vercel.app/login", data)
+                .then((res) => {
+                  console.log(res);
+                  if (res.status == 200) {
+                    navigate("/home", { state: username });
+                  }
+                });
             }}
           >
             Login
@@ -164,9 +168,12 @@ function Description() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post("http://localhost:8080/display", {
-          username: data,
-        });
+        const response = await axios.post(
+          "https://multi-user-todo-backend.vercel.app/display",
+          {
+            username: data,
+          }
+        );
         setTodoList(response.data.todos);
       } catch (error) {
         console.error("Error fetching todos:", error);
@@ -231,7 +238,7 @@ function Description() {
   );
   function handleclick() {
     axios
-      .post("http://localhost:8080/add", {
+      .post("https://multi-user-todo-backend.vercel.app/add", {
         todo: todo,
         description: todod,
         username: data,
@@ -243,7 +250,7 @@ function Description() {
 
   function handledelete(_id) {
     axios
-      .post("http://localhost:8080/delete", {
+      .post("https://multi-user-todo-backend.vercel.app/delete", {
         id: _id,
         username: data,
       })
